@@ -80,3 +80,14 @@ class EmbeddingsDictionary:
         _, neighbor_ids = self.emb2neighbors(self.emb[query_id], top_k + 1)
         neighbor_words = [self.words[i] for i in neighbor_ids if i != query_id]
         return neighbor_words
+
+    def analogy(self, word1, word2, word3):
+        ind1 = self.dictionary[word1]
+        ind2 = self.dictionary[word2]
+        ind3 = self.dictionary[word3]
+
+        target_embedding = self.emb[ind1] + self.emb[ind2] - self.emb[ind3]
+        _score, closest_word_index = self.emb2neighbors(target_embedding, top_k=3)
+        for ind in closest_word_index:
+            if (ind != ind1 and ind != ind2 and ind != ind3):
+                print(self.words[ind])
