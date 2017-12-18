@@ -87,7 +87,8 @@ class EmbeddingsDictionary:
         ind3 = self.dictionary[word3]
 
         target_embedding = self.emb[ind1] + self.emb[ind2] - self.emb[ind3]
-        _score, closest_word_index = self.emb2neighbors(target_embedding, top_k=3)
+        _score, closest_word_index = self.emb2neighbors(target_embedding, top_k=5)
         for ind in closest_word_index:
             if (ind != ind1 and ind != ind2 and ind != ind3):
                 print(self.words[ind])
+                break
